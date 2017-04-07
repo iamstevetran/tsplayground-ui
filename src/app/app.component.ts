@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from './shared/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +10,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
 	jsCode: string;
 	isTsCompiling: boolean;
+
+	constructor(private authService?: AuthService) {
+
+	}
 
 	onTsCompile(jsCode: string) {
 		this.jsCode = jsCode;

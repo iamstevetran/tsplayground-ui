@@ -4,3 +4,10 @@
 @import '~codemirror/lib/codemirror.css';
 @import '~codemirror/theme/material.css';
 @import '~codemirror/addon/lint/lint.css';
+
+.spacer {
+    flex: 1 1 auto;
+}
+.fluid {
+    width: 100%;
+}

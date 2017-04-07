@@ -1,4 +1,28 @@
-<md-toolbar color="primary">Typescript Playground</md-toolbar>
+<md-toolbar color="primary">
+	Typescript Playground
+	<span class="spacer"></span>
+	<button md-icon-button [mdMenuTriggerFor]="profileMenu">
+		<md-icon>person</md-icon>
+	</button>
+	<md-menu #profileMenu="mdMenu">
+		<ng-template [ngIf]="authService.userProfile">
+          <button md-menu-item>
+		    <md-icon>face</md-icon>
+			{{authService.userProfile.name}}
+          </button>
+		</ng-template>
+		<button md-menu-item appAuth0LoginButton>
+			<ng-template [ngIf]="!authService.authenticated()">
+               <md-icon>account_circle</md-icon>
+			   <span>Login</span>
+			</ng-template>
+			<ng-template [ngIf]="authService.authenticated()">
+			   <md-icon>exit_to_app</md-icon>
+			   <span>Logout</span>
+			</ng-template>
+		</button>
+	</md-menu>
+</md-toolbar>
 <md-grid-list cols="4" rowHeight="440px">
   <md-grid-tile colspan="2" rowspan="1">
   	<app-ts-editor (onCompile)="onTsCompile($event)"
