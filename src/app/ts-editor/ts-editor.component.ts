@@ -46,10 +46,14 @@ export class TsEditorComponent implements OnInit {
 		}
 
   	this.updateTimeout = setTimeout(() => {
-  		this.compileService.compile(this.code, '2.2').subscribe(jsCode => {
-  			this.onCompile.emit(jsCode);
-  			this.onEndCompile.emit(true);
-  		})
+  		this.compileService.compile(this.code, '2.2')
+				.subscribe(jsCode => {
+					this.onCompile.emit(jsCode);
+					this.onEndCompile.emit(true);
+				}, () => {
+					this.onCompile.emit('// Compile failed');
+					this.onEndCompile.emit(true);
+				})
   	}, 1000);
   }
 
