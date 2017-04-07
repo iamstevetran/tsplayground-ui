@@ -1,6 +1,9 @@
-# PlaygroundUi
+# tsplayground-ui
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+
+## Setup
+Run command `cp src/environments/private.config.example.ts src/environments/private.config.ts ` to create private config and fill in your **Auth0** client info. If you haven't have one, create it [here](https://auth0.com/).
 
 ## Development server
 
