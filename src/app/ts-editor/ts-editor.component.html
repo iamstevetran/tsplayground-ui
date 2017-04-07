@@ -2,6 +2,12 @@
   [config]="configs"
   (focus)="onFocus()"
   (blur)="onBlur()"
-  (ngModelChange)="codeChange($event)">
+  (ngModelChange)="codeChange()">
 </codemirror>
-<a md-mini-fab color="primary" class="editor-label">TS</a>
+<a md-mini-fab color="primary" class="editor-label" [mdMenuTriggerFor]="changeTSVersion">TS</a>
+<md-menu #changeTSVersion="mdMenu">
+  <button md-menu-item *ngFor="let theVersion of supportedVersions" (click)="versionChange(theVersion)">
+    {{theVersion}}
+    <md-icon *ngIf="theVersion === version">check</md-icon>
+  </button>
+</md-menu>

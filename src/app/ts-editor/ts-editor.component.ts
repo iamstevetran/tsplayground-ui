@@ -33,20 +33,40 @@ export class TsEditorComponent implements OnInit {
 	@Output() onStartCompile = new EventEmitter();
 	@Output() onEndCompile = new EventEmitter();
 
+	supportedVersions: string[] = [
+		'2.2.2',
+		'2.2.0',
+		'2.1.6',
+		'2.1.5',
+		'2.1.4',
+		'2.0',
+		'1.8'
+	]
+
+	version: string = this.supportedVersions[0];
+
   constructor(private compileService: CompileService) { }
 
   ngOnInit() {
 
   }
 
-  codeChange() {
+  codeChange(version?: string) {
   	this.onStartCompile.emit(true);
+		version = version || this.version;
+		this.version = version;
+
+		if (this.supportedVersions.indexOf(version) === -1) {
+			this.onCompile.emit('// Compile failed');
+			this.onEndCompile.emit(true);
+		}
+
 		if (this.updateTimeout) {
 			clearTimeout(this.updateTimeout);
 		}
 
   	this.updateTimeout = setTimeout(() => {
-  		this.compileService.compile(this.code, '2.2')
+  		this.compileService.compile(this.code, version)
 				.subscribe(jsCode => {
 					this.onCompile.emit(jsCode);
 					this.onEndCompile.emit(true);
@@ -56,6 +76,10 @@ export class TsEditorComponent implements OnInit {
 				})
   	}, 1000);
   }
+
+	versionChange(version: string) {
+		this.codeChange(version);
+	}
 
   onFocus() {
 

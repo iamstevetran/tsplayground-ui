@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
 
 import 'hammerjs';
 import { MaterialModule } from '@angular/material';
@@ -16,7 +16,7 @@ import 'codemirror/addon/fold/foldgutter.js';
 import 'codemirror/addon/fold/brace-fold.js';
 import 'codemirror/addon/fold/comment-fold.js';
 
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { TsEditorComponent } from './ts-editor/ts-editor.component';
@@ -26,6 +26,10 @@ import { AuthService } from './shared/auth.service';
 import { CompileService } from './shared/compile.service';
 
 import { LoginModule } from './login/login.module';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp( new AuthConfig({}), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { LoginModule } from './login/login.module';
     LoginModule
   ],
   providers: [
-    AUTH_PROVIDERS,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [ Http, RequestOptions ]
+    },
     AuthService,
     CompileService
   ],
