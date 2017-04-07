@@ -1,0 +1,6 @@
+<codemirror [(ngModel)]="code"
+  [config]="configs"
+  (focus)="onFocus()"
+  (blur)="onBlur()"
+  (ngModelChange)="codeChange($event)">
+</codemirror>

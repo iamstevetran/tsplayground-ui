@@ -1,0 +1,12 @@
+<md-toolbar color="primary">Typescript Playground</md-toolbar>
+<md-grid-list cols="4" rowHeight="440px">
+  <md-grid-tile colspan="2" rowspan="1">
+  	<app-ts-editor (onCompile)="onTsCompile($event)"
+  								 (onStartCompile)="onStartTsCompile($event)"
+  								 (onEndCompile)="onEndTsCompile($event)"></app-ts-editor>
+  </md-grid-tile>
+  <md-grid-tile colspan="2" rowspan="1">
+  	<md-progress-bar mode="indeterminate" *ngIf="isTsCompiling"></md-progress-bar>
+  	<app-js-editor [code]="jsCode"></app-js-editor>
+	</md-grid-tile>
+</md-grid-list>
