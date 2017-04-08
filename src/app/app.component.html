@@ -1,16 +1,18 @@
 <md-toolbar color="primary">
 	Typescript Playground
 	<span class="spacer"></span>
-	<md-chip-list>
-		<md-chip color="accent" selected="true">You need to login before using playground</md-chip>
-	</md-chip-list>
-	&nbsp;&nbsp;
-	<md-icon>forward</md-icon>
+	<ng-template [ngIf]="!authService.authenticated()">
+		<md-chip-list>
+			<md-chip color="accent" selected="true">You need to login before using playground</md-chip>
+		</md-chip-list>
+		&nbsp;&nbsp;
+		<md-icon>forward</md-icon>
+	</ng-template>
 	<button md-icon-button [mdMenuTriggerFor]="profileMenu">
 		<md-icon>person</md-icon>
 	</button>
 	<md-menu #profileMenu="mdMenu">
-		<ng-template [ngIf]="authService.userProfile">
+		<ng-template [ngIf]="authService.authenticated() && authService.userProfile">
 			<button md-menu-item>
 			<md-icon>face</md-icon>
 				{{authService.userProfile.name}}
@@ -18,12 +20,12 @@
 		</ng-template>
 		<button md-menu-item appAuth0LoginButton>
 			<ng-template [ngIf]="!authService.authenticated()">
-               <md-icon>account_circle</md-icon>
-			   <span>Login</span>
+				<md-icon>account_circle</md-icon>
+				<span>Login</span>
 			</ng-template>
 			<ng-template [ngIf]="authService.authenticated()">
-			   <md-icon>exit_to_app</md-icon>
-			   <span>Logout</span>
+				<md-icon>exit_to_app</md-icon>
+				<span>Logout</span>
 			</ng-template>
 		</button>
 	</md-menu>
