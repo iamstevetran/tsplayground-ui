@@ -16,6 +16,8 @@ import 'codemirror/mode/javascript/javascript.js';
 import * as jshint from 'jshint';
 window["JSHINT"] = jshint.JSHINT;
 
+// import 'codemirror-lint-eslint';
+
 import 'codemirror/addon/lint/lint.js';
 import 'codemirror/addon/lint/javascript-lint.js';
 /**
