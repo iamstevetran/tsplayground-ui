@@ -11,15 +11,10 @@ import {
 })
 export class JsEditorComponent implements OnInit {
 	configs = { 
-		lineNumbers: true,
 		mode: {
 			name: 'javascript',
 			json: true
 		},
-		gutters: ['CodeMirror-lint-markers'],
-    lint: true,
-		theme: 'material',
-		matchBrackets: true,
 	};
 	@Input() code: string;
 

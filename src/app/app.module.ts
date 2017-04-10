@@ -7,15 +7,6 @@ import { HttpModule, Http, RequestOptions } from '@angular/http';
 import 'hammerjs';
 import { MaterialModule } from '@angular/material';
 
-import { CodemirrorModule } from 'ng2-codemirror';
-import 'codemirror/mode/javascript/javascript.js';
-import 'codemirror/addon/lint/lint.js';
-import 'codemirror/addon/lint/javascript-lint.js';
-import 'codemirror/addon/fold/foldcode.js';
-import 'codemirror/addon/fold/foldgutter.js';
-import 'codemirror/addon/fold/brace-fold.js';
-import 'codemirror/addon/fold/comment-fold.js';
-
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
@@ -26,6 +17,7 @@ import { AuthService } from './shared/auth.service';
 import { CompileService } from './shared/compile.service';
 
 import { LoginModule } from './login/login.module';
+import { CodemirrorComponent } from './codemirror/codemirror.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
@@ -35,7 +27,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [
     AppComponent,
     TsEditorComponent,
-    JsEditorComponent
+    JsEditorComponent,
+    CodemirrorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +36,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     MaterialModule,
-    CodemirrorModule,
+    // CodemirrorModule,
     LoginModule
   ],
   providers: [

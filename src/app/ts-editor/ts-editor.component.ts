@@ -15,17 +15,11 @@ import { CompileService } from '../shared/compile.service';
 export class TsEditorComponent implements OnInit {
 	code: string;
 	configs = { 
-		lineNumbers: true,
 		mode: {
 			name: 'javascript',
 			json: true,
 			typescript: true
 		},
-		gutters: ['CodeMirror-lint-markers'],
-    lint: true,
-		tabSize: 2,
-		theme: 'material',
-		matchBrackets: true,
 	};
 	updateTimeout: any;
 
