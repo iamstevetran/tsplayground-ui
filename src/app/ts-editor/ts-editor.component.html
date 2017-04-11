@@ -6,7 +6,7 @@
 </codemirror>
 <a md-mini-fab color="primary" class="editor-label" [mdMenuTriggerFor]="changeTSVersion">TS</a>
 <md-menu #changeTSVersion="mdMenu">
-  <button md-menu-item *ngFor="let theVersion of supportedVersions" (click)="versionChange(theVersion)">
+  <button md-menu-item *ngFor="let theVersion of supportedVersions" (click)="versionChange(theVersion)" [disabled]="theVersion === version">
     {{theVersion}}
     <md-icon *ngIf="theVersion === version">check</md-icon>
   </button>
