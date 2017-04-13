@@ -1,0 +1,3 @@
+<ng-template [ngIf]="editorProvider === 'monaco'">
+  <monaco-editor [(ngModel)]="code" [language]="language" (ngModelChange)="onChange($event)"></monaco-editor>
+</ng-template>

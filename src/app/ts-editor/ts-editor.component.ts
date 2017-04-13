@@ -1,20 +1,22 @@
-import { 
-	Component, 
+import {
+	Component,
 	OnInit,
 	Output,
-	EventEmitter } from '@angular/core';
+	NgZone,
+	EventEmitter
+} from '@angular/core';
 
 import { CompileService } from '../shared/compile.service';
 
 @Component({
-  selector: 'app-ts-editor',
-  templateUrl: './ts-editor.component.html',
-  styleUrls: ['./ts-editor.component.css']
+	selector: 'app-ts-editor',
+	templateUrl: './ts-editor.component.html',
+	styleUrls: ['./ts-editor.component.css']
 })
 
 export class TsEditorComponent implements OnInit {
 	code: string;
-	configs = { 
+	configs = {
 		mode: {
 			name: 'javascript',
 			json: true,
@@ -39,47 +41,50 @@ export class TsEditorComponent implements OnInit {
 
 	version: string = this.supportedVersions[0];
 
-  constructor(private compileService: CompileService) { }
+	constructor(private compileService?: CompileService,
+							private ngZone?: NgZone) { }
 
-  ngOnInit() {
+	ngOnInit() {
 
-  }
+	}
 
-  codeChange(version?: string) {
-  	this.onStartCompile.emit(true);
-		version = version || this.version;
-		this.version = version;
+	codeChange(version?: string) {
+		this.ngZone.run(() => {
+			this.onStartCompile.emit(true);
+			version = version || this.version;
+			this.version = version;
 
-		if (this.supportedVersions.indexOf(version) === -1) {
-			this.onCompile.emit('// Compile failed');
-			this.onEndCompile.emit(true);
-		}
+			if (this.supportedVersions.indexOf(version) === -1) {
+				this.onCompile.emit('// Compile failed');
+				this.onEndCompile.emit(true);
+			}
 
-		if (this.updateTimeout) {
-			clearTimeout(this.updateTimeout);
-		}
+			if (this.updateTimeout) {
+				clearTimeout(this.updateTimeout);
+			}
 
-  	this.updateTimeout = setTimeout(() => {
-  		this.compileService.compile(this.code, version)
-				.subscribe(jsCode => {
-					this.onCompile.emit(jsCode);
-					this.onEndCompile.emit(true);
-				}, () => {
-					this.onCompile.emit('// Compile failed');
-					this.onEndCompile.emit(true);
-				})
-  	}, 1000);
-  }
+			this.updateTimeout = setTimeout(() => {
+				this.compileService.compile(this.code, version)
+					.subscribe(jsCode => {
+						this.onCompile.emit(jsCode);
+						this.onEndCompile.emit(true);
+					}, () => {
+						this.onCompile.emit('// Compile failed');
+						this.onEndCompile.emit(true);
+					})
+			}, 1000);
+		});
+	}
 
 	versionChange(version: string) {
 		this.codeChange(version);
 	}
 
-  onFocus() {
+	onFocus() {
 
-  }
+	}
 
-  onBlur() {
+	onBlur() {
 
-  }
+	}
 }

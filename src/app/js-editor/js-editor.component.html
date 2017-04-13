@@ -1,6 +1,5 @@
-<codemirror [(ngModel)]="code"
-  [config]="configs"
-  (focus)="onFocus()"
-  (blur)="onBlur()">
-</codemirror>
+<app-editor [(ngModel)]="code" 
+            [language]="'javascript'" 
+            (focus)="onFocus()"
+            (blur)="onBlur()"></app-editor>
 <a md-mini-fab color="primary" class="editor-label">JS</a>

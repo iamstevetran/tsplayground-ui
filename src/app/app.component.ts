@@ -9,7 +9,7 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent {
 	jsCode: string;
-	isTsCompiling: boolean;
+	isTsCompiling: boolean = false;
 
 	constructor(private authService?: AuthService) {
 

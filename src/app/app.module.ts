@@ -17,7 +17,7 @@ import { AuthService } from './shared/auth.service';
 import { CompileService } from './shared/compile.service';
 
 import { LoginModule } from './login/login.module';
-import { CodemirrorComponent } from './codemirror/codemirror.component';
+import { EditorModule } from './editor/editor.module';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
@@ -28,7 +28,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppComponent,
     TsEditorComponent,
     JsEditorComponent,
-    CodemirrorComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +35,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     MaterialModule,
-    // CodemirrorModule,
-    LoginModule
+    LoginModule,
+    EditorModule
   ],
   providers: [
     {

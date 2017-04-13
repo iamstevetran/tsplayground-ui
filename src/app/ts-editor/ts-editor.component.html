@@ -1,9 +1,8 @@
-<codemirror [(ngModel)]="code"
-  [config]="configs"
-  (focus)="onFocus()"
-  (blur)="onBlur()"
-  (ngModelChange)="codeChange()">
-</codemirror>
+<app-editor [(ngModel)]="code" 
+            [language]="'typescript'" 
+            (ngModelChange)="codeChange()"
+            (focus)="onFocus()"
+            (blur)="onBlur()"></app-editor>
 <a md-mini-fab color="primary" class="editor-label" [mdMenuTriggerFor]="changeTSVersion">TS</a>
 <md-menu #changeTSVersion="mdMenu">
   <button md-menu-item *ngFor="let theVersion of supportedVersions" (click)="versionChange(theVersion)" [disabled]="theVersion === version">
